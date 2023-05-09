@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="tum4World:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>tum4World</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="tum4World-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="tum4World:war exploded" />
+    </root>
+  </artifact>
+</component>
