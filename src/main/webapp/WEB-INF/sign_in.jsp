@@ -6,7 +6,7 @@
     <title>Tum4World</title>
 </head>
 <body>
-<div class="bg-dark text-white fixed-top">
+<div class="bg-dark text-white sticky-top">
     <h1 class="text-center">Turn4World</h1>
     <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
@@ -19,9 +19,82 @@
         </div>
     </nav>
 </div>
-<div></div>
+<div class="container text-center">
+    <br><br>
+    <div class="row" id="errormessage">
+
+    </div>
+    <div class="row w-25 mx-auto p-2">
+        <form name="signinForm" action="SignInServlet" onsubmit="return validateForm()" class="row g-3">
+            <div class="row-auto">
+                <h2>Registrati</h2>
+            </div>
+            <div class="row-auto">
+                <input type="text" class="form-control" name="nomesignin" placeholder="Nome" required>
+            </div>
+            <div class="row-auto">
+                <input type="text" class="form-control" name="cognomesignin" placeholder="Cognome" required>
+            </div>
+            <div class="row-auto">
+                <input type="date" class="form-control" name="datasignin" required>
+            </div>
+            <div class="row-auto">
+                <input type="text" class="form-control" name="emailsignin" placeholder="Email" required>
+            </div>
+            <div class="row-auto">
+                <input type="tel" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="numerosignin" placeholder="Cellulare" required>
+            </div>
+            <div class="row-auto">
+                <select class="form-select" aria-label="Default select example">
+                    <option value="1">Simpatizzante</option>
+                    <option value="2">Aderente</option>
+                </select>
+            </div>
+            <div class="row-auto">
+                <input type="text" class="form-control" name="usernamesignin" placeholder="Username" required>
+            </div>
+            <div class="row-auto">
+                <input type="password" class="form-control" name="passwordlogin" placeholder="Password" required>
+                <!-- Aggiungere info dialog su come deve essere la password -->
+            </div>
+            <div class="row-auto">
+                <button type="submit" class="btn btn-primary mb-3">Sign In</button>
+                <button type="submit" class="btn btn-primary mb-3">Reset</button>
+            </div>
+        </form>
+    </div>
+    <div class="row" id="frase">
+
+    </div>
+</div>
 <div class="bg-dark text-white fixed-bottom">
     <p class="fst-italic text-center">Turn4World, via Fittizia 0, CAP: 16000, Citta Fittizia, Nazione Fittizia</p>
 </div>
 </body>
 </html>
+
+<script>
+
+    function validateForm(){
+        let x = document.forms["signinForm"]["datasignin"].value;
+        let y = document.forms["signinForm"]["numerosignin"].value;
+        if(!underAgeValidate(x)){
+            alert("L'utente deve essere maggiorenne per potersi registrare");
+            return false;
+        }
+    }
+
+
+    function underAgeValidate(birthday){
+        var optimizedBirthday = birthday.replace(/-/g, "/");
+        var myBirthday = new Date(optimizedBirthday);
+        var currentDate = new Date().toJSON().slice(0,10)+' 01:00:00';
+        var myAge = ~~((Date.now(currentDate) - myBirthday) / (31557600000));
+        if(myAge < 18) {
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+</script>
