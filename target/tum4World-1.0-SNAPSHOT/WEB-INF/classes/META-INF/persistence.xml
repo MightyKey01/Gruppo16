@@ -4,6 +4,9 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
     <persistence-unit name="default">
-
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:derby://localhost:1527/gruppo16DB"/>
+            <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.ClientDriver"/>
+        </properties>
     </persistence-unit>
 </persistence>
