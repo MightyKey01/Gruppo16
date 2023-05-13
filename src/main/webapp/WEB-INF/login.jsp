@@ -24,17 +24,15 @@
 
     </div>
     <div class="row w-25 position-absolute top-50 start-50 translate-middle">
-        <form action="LoginServlet" class="row g-3">
+        <form name="loginForm" action="LoginServlet" method="post" class="row g-3">
             <div class="row-auto">
                 <h2>Accedi</h2>
             </div>
             <div class="row-auto">
-                <label for="usernamelogin" class="visually-hidden">Username</label>
-                <input type="text" class="form-control" id="usernamelogin" placeholder="Username">
+                <input type="text" class="form-control" name="usernamelogin" placeholder="Username">
             </div>
             <div class="row-auto">
-                <label for="passwordlogin" class="visually-hidden">Password</label>
-                <input type="password" class="form-control" id="passwordlogin" placeholder="Password">
+                <input type="password" class="form-control"  name="passwordlogin" placeholder="Password">
             </div>
             <div class="row-auto">
                 <button type="submit" class="btn btn-primary mb-3">Login</button>
@@ -50,3 +48,4 @@
 </div>
 </body>
 </html>
+

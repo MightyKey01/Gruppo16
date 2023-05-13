@@ -14,34 +14,41 @@ public class SignInServlet extends HttpServlet {
     String user = "impact";
     String password = "derby";
     Connection conn = null;
-    @Override
-    public void init() {
-        try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-            conn = DriverManager.getConnection(dbURL);
-        } catch (ClassNotFoundException | SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-    @Override
-    public void destroy() {
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        try {
-            conn = DriverManager.getConnection(dbURL,user,password);
-            out.println("culo");
+        String nome = request.getParameter("nomesignin");
+        String cognome = request.getParameter("cognomesignin");
+        String data = request.getParameter("datasignin");
+        String email = request.getParameter("emailsignin");
+        String tel = request.getParameter("numerosignin");
+        String ruolo = request.getParameter("ruolosignin");
+        String username = request.getParameter("usernamesignin");
+        String pass = request.getParameter("passwordsignin");
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            conn = DriverManager.getConnection(dbURL);
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO UTENTI values (?,?,?,?,?,?,?,?)");
+            ps.setString(1,nome);
+            ps.setString(2,cognome);
+            ps.setString(3,data);
+            ps.setString(4,email);
+            ps.setString(5,tel);
+            ps.setString(6,ruolo);
+            ps.setString(7,username);
+            ps.setString(8,pass);
+            int count = ps.executeUpdate();
+            if(count > 0){
+                out.println("Registrazione effettuata");
+            }
+            else{
+                out.println("Qualcosa è andato storto");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
         }
-        out.println("culetto");
     }
 }
