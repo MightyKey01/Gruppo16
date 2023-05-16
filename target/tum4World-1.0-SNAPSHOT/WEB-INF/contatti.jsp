@@ -19,7 +19,33 @@
         </div>
     </nav>
 </div>
-<div></div>
+<div class="container text-center">
+    <div class="w-25 mx-auto p-2" style="position: absolute;top: 30%;left:38%">
+        <p><h6>Indirizzo: Turn4World, via Fittizia 0, Citta Fittizia</h6></p>
+        <p><h6>Numero di telefono: +00 000 000 0000</h6></p>
+        <form name="loginForm" action="LoginServlet" method="post" class="row g-3">
+        <div class="row-auto">
+            <h3>Contattaci</h3>
+        </div>
+        <div class="row-auto">
+            <input type="text" class="form-control" name="nomecognomecont" placeholder="Nome e Cognome">
+        </div>
+        <div class="row-auto">
+            <input type="password" class="form-control"  name="emailcont" placeholder="Email">
+        </div>
+        <div class="row-auto">
+            <select class="form-select" aria-label="Default select example" nome="ruolosignin">
+                <option value="1">Motivo 1</option>
+                <option value="2">Motivo 2</option>
+                <option value="3">Altro</option>
+            </select>
+        </div>
+        <div class="row-auto">
+            <button type="submit" class="btn btn-primary mb-3">Login</button>
+        </div>
+        </form>
+    </div>
+</div>
 <div class="bg-dark text-white fixed-bottom">
     <p class="fst-italic text-center">Turn4World, via Fittizia 0, CAP: 16000, Citta Fittizia, Nazione Fittizia</p>
 </div>

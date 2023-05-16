@@ -19,11 +19,8 @@
         </div>
     </nav>
 </div>
-<div class="container text-center">
-    <div class="row" id="errormessage">
-
-    </div>
-    <div class="row w-25 position-absolute top-50 start-50 translate-middle">
+<div class="container text-center" >
+    <div class="row w-25" style="margin: auto;width: 50%;">
         <form name="loginForm" action="LoginServlet" method="post" class="row g-3">
             <div class="row-auto">
                 <h2>Accedi</h2>
@@ -39,8 +36,11 @@
             </div>
         </form>
     </div>
-    <div class="row" id="frase">
-
+    <div class="row position-static bottom-0" id="errormessage" style="color: #FF0000;">
+        <h5>${errorMessage}</h5>
+    </div>
+    <div class="row" id="frase" style="position: absolute;top: 90%;left:38%">
+        <p>culo</p>
     </div>
 </div>
 <div class="bg-dark text-white fixed-bottom">

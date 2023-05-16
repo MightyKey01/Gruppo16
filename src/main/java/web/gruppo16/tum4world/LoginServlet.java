@@ -29,13 +29,14 @@ public class LoginServlet extends HttpServlet {
             ps.setString(2,pass);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
+                request.getSession().removeAttribute("errorMessage");
                 out.println("Accesso Eseguito");
             }
             else{
+                request.getSession().setAttribute("errorMessage", "Username e/o Password errati!");
                 response.sendRedirect("login.jsp");
             }
             conn.close();
-
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
         }

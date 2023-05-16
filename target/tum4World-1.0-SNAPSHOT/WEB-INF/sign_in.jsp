@@ -21,11 +21,8 @@
 </div>
 <div class="container text-center">
     <br><br>
-    <div class="row" id="errormessage">
-
-    </div>
     <div class="row w-25 mx-auto p-2">
-        <form name="signinForm" action="SignInServlet" method="post" onsubmit="return validateForm()" class="row g-3">
+        <form name="signinForm" action="SignInServlet" method="post" class="row g-3">
             <div class="row-auto">
                 <h2>Registrati</h2>
             </div>
@@ -45,9 +42,9 @@
                 <input type="tel" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="numerosignin" placeholder="Cellulare" required>
             </div>
             <div class="row-auto">
-                <select class="form-select" aria-label="Default select example" nome="ruolosignin">
-                    <option value="1">Simpatizzante</option>
-                    <option value="2">Aderente</option>
+                <select class="form-select" aria-label="Default select example" nome="ruolosignin" id="ruolosignin">
+                    <option value="simp">Simpatizzante</option>
+                    <option value="ader">Aderente</option>
                 </select>
             </div>
             <div class="row-auto">
@@ -58,12 +55,13 @@
                 <!-- Aggiungere info dialog su come deve essere la password -->
             </div>
             <div class="row-auto">
-                <button type="submit" class="btn btn-primary mb-3">Sign In</button>
+                <button type="button" onclick="validateForm()" class="btn btn-primary mb-3">Sign In</button>
                 <button type="submit" class="btn btn-primary mb-3">Reset</button>
             </div>
         </form>
+
     </div>
-    <div class="row" id="frase">
+    <div class="row" id="frase" style="position: absolute;top: 90%;left:38%">
 
     </div>
 </div>
@@ -78,16 +76,18 @@
     function validateForm(){
         let x = document.forms["signinForm"]["datasignin"].value;
         let y = document.forms["signinForm"]["passwordsignin"].value;
-        console.log(document.forms["signinForm"]["passwordsignin"].value)
+        var select = document.getElementById('ruolosignin');
+        var value = select.options[select.selectedIndex].text;
+        console.log(value);
         if(!underAgeValidate(x)){
             alert("L'utente deve essere maggiorenne per potersi registrare");
-            return false;
+            return;
         }
-
         if(!passwordValidate(y)){
             alert("La password deve essere lunga 8 caratteri, deve contenere la prima lettera dei nomi propri di ciascuno di voi, almeno un carattere numerico, un carattere maiuscolo e un carattere tra $, ! e ?");
-            return false;
+            return
         }
+        document.forms['signinForm'].submit();
     }
 
 

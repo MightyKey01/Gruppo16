@@ -49,6 +49,8 @@ public class SignInServlet extends HttpServlet {
             }
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
+
         }
     }
 }
+
