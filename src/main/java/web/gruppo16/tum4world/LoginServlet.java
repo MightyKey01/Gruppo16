@@ -10,8 +10,6 @@ import java.sql.*;
 @WebServlet(name = "LoginServlet", value = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
     String dbURL = "jdbc:derby://localhost:1527/gruppo16DB";
-    String user = "impact";
-    String password = "derby";
     Connection conn = null;
 
     @Override

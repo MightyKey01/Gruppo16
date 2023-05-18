@@ -11,8 +11,6 @@ import java.sql.*;
 @WebServlet(name = "SignInServlet", value = "/SignInServlet")
 public class SignInServlet extends HttpServlet {
     String dbURL = "jdbc:derby://localhost:1527/gruppo16DB";
-    String user = "impact";
-    String password = "derby";
     Connection conn = null;
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
