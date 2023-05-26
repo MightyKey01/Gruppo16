@@ -23,7 +23,7 @@
     <div class="w-25 mx-auto p-2" style="position: absolute;top: 30%;left:38%">
         <p><h6>Indirizzo: Turn4World, via Fittizia 0, Citta Fittizia</h6></p>
         <p><h6>Numero di telefono: +00 000 000 0000</h6></p>
-        <form name="loginForm" action="LoginServlet" method="post" class="row g-3">
+        <form name="contattiForm" action="ContattiServlet" method="post" class="row g-3">
         <div class="row-auto">
             <h3>Contattaci</h3>
         </div>
@@ -41,7 +41,11 @@
             </select>
         </div>
         <div class="row-auto">
-            <button type="submit" class="btn btn-primary mb-3">Login</button>
+            <textarea class="form-control" placeholder="Qualche informazione in più..."  rows="3"></textarea>
+        </div>
+        <div class="row-auto">
+            <button type="button" class="btn btn-primary mb-3">Invia</button>
+            <button type="reset" class="btn btn-primary mb-3">Reset</button>
         </div>
         </form>
     </div>
@@ -51,3 +55,15 @@
 </div>
 </body>
 </html>
+
+
+<script>
+    function ValidateEmail(){
+        let x = document.forms["contattiForm"]["emailcontn"].value;
+        if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(x)){
+            document.forms['contattiForm'].submit();
+        }else{
+            alert("Hai inserito un'email invalida!");
+        }
+    }
+</script>

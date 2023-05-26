@@ -14,8 +14,13 @@
                 <a class="navbar-brand" href="chi_siamo.jsp">Chi siamo</a>
                 <a class="navbar-brand" href="attività.jsp">Attività</a>
                 <a class="navbar-brand" href="contatti.jsp">Contatti</a>
-                <a class="navbar-brand" href="sign_in.jsp">Sign-in</a>
-                <a class="navbar-brand" href="login.jsp">Login</a>
+                <% if(session.getAttribute("logged")!=null && session.getAttribute("logged") == Boolean.TRUE) {%>
+                    <a class="navbar-brand" href="#">Profilo</a>
+                    <a class="navbar-brand" href="#">Logout</a>
+                <%} else { %>
+                    <a class="navbar-brand" href="sign_in.jsp">Sign-in</a>
+                    <a class="navbar-brand" href="login.jsp">Login</a>
+                <% } %>
             </div>
         </nav>
     </div>

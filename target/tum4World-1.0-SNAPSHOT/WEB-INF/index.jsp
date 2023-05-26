@@ -19,9 +19,33 @@
             </div>
         </nav>
     </div>
-    <div></div>
+    <div id="frase" style="position: absolute;top: 90%;left:2%">
+
+    </div>
     <div class="bg-dark text-white fixed-bottom">
         <p class="fst-italic text-center">Turn4World, via Fittizia 0, CAP: 16000, Citta Fittizia, Nazione Fittizia</p>
     </div>
 </body>
 </html>
+
+<script>
+
+    const readTxt = async() =>{
+        let file = "frasi_filosofiche.txt";
+        let response = await fetch(file);
+        const txt = await response.text().then((str) => {
+            return str.split('\r\n');
+        });
+
+        const result = txt;
+        let scelta = Math.floor(Math.random() * 7);
+
+        document.getElementById("frase").innerHTML = "";
+        document.getElementById("frase").innerHTML = "<i>" + result[scelta] + "</i>";
+    }
+    readTxt();
+    setInterval(function (){
+        readTxt();
+    }, 20000);
+
+</script>

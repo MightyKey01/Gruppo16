@@ -42,7 +42,7 @@
                 <input type="tel" class="form-control" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="numerosignin" placeholder="Cellulare" required>
             </div>
             <div class="row-auto">
-                <select class="form-select" aria-label="Default select example" nome="ruolosignin" id="ruolosignin">
+                <select class="form-select" aria-label="Default select example" name="ruolosignin" id="ruolosignin">
                     <option value="simp">Simpatizzante</option>
                     <option value="ader">Aderente</option>
                 </select>

@@ -28,7 +28,8 @@ public class LoginServlet extends HttpServlet {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 request.getSession().removeAttribute("errorMessage");
-                out.println("Accesso Eseguito");
+                request.getSession().setAttribute("logged", true);
+                response.sendRedirect("profilo.jsp");
             }
             else{
                 request.getSession().setAttribute("errorMessage", "Username e/o Password errati!");
