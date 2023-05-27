@@ -22,13 +22,14 @@ public class LoginServlet extends HttpServlet {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             conn = DriverManager.getConnection(dbURL);
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM UTENTI WHERE USERNAME = ? AND PASSWORD = ?");
+            PreparedStatement ps = conn.prepareStatement("SELECT RUOLO FROM UTENTI WHERE USERNAME = ? AND PASSWORD = ?");
             ps.setString(1,username);
             ps.setString(2,pass);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 request.getSession().removeAttribute("errorMessage");
                 request.getSession().setAttribute("logged", true);
+                request.getSession().setAttribute("ruolo", rs.getString(1));
                 response.sendRedirect("profilo.jsp");
             }
             else{
