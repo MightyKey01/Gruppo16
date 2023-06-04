@@ -13,7 +13,8 @@
     </filter>
     <filter-mapping>
         <filter-name>loginFilter</filter-name>
-        <url-pattern>/profilo.jsp</url-pattern>
+        <url-pattern>/ProfiloServlet</url-pattern>
+        <url-pattern>/CancellaAccountServlet</url-pattern>
     </filter-mapping>
 
     <filter>

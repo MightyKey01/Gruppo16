@@ -6,3 +6,6 @@ nav.navbar{
     background-color: black;
 }
 
+div.card{
+    border-style: solid;
+}

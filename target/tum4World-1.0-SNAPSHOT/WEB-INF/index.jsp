@@ -7,13 +7,14 @@
 
         <% if(session.getAttribute("ruolo")==null) { %>
             <link rel="stylesheet" href="css/base.css">
-        <%} else if(session.getAttribute("ruolo").equals("admin")){ %>
+        <%} else if(session.getAttribute("ruolo").equals("Admin")){ %>
             <link rel="stylesheet" href="css/amministratore.css">
-        <%} else if(session.getAttribute("ruolo").equals("aderente")){ %>
+        <%} else if(session.getAttribute("ruolo").equals("Aderente")){ %>
              <link rel="stylesheet" href="css/aderente.css">
-        <%} else if(session.getAttribute("ruolo").equals("simpatizzante")){ %>
+        <%} else if(session.getAttribute("ruolo").equals("Simpatizzante")){ %>
             <link rel="stylesheet" href="css/simpatizzante.css">
         <%}%>
+
 </head>
 <body>
     <div class="text-white fixed-top">
@@ -25,7 +26,7 @@
                 <a class="navbar-brand" href="attività.jsp">Attività</a>
                 <a class="navbar-brand" href="contatti.jsp">Contatti</a>
                 <% if(session.getAttribute("logged")!=null && session.getAttribute("logged") == Boolean.TRUE) {%>
-                    <a class="navbar-brand" href="#">Profilo</a>
+                    <a class="navbar-brand" href="./ProfiloServlet">Profilo</a>
                     <a class="navbar-brand" href="#">Logout</a>
                 <%} else { %>
                     <a class="navbar-brand" href="sign_in.jsp">Sign-in</a>

@@ -44,8 +44,8 @@
             </div>
             <div class="row-auto">
                 <select class="form-select" aria-label="Default select example" name="ruolosignin" id="ruolosignin">
-                    <option value="simp">Simpatizzante</option>
-                    <option value="ader">Aderente</option>
+                    <option value="Simpatizzante">Simpatizzante</option>
+                    <option value="Aderente">Aderente</option>
                 </select>
             </div>
             <div class="row-auto">

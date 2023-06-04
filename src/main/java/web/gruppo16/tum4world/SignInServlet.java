@@ -39,6 +39,7 @@ public class SignInServlet extends HttpServlet {
             ps.setString(7,username);
             ps.setString(8,pass);
             int count = ps.executeUpdate();
+            conn.close();
             if(count > 0){
                 out.println("Registrazione effettuata");
             }

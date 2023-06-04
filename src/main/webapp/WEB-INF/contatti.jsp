@@ -26,7 +26,7 @@
             <a class="navbar-brand" href="attività.jsp">Attività</a>
             <a class="navbar-brand" href="contatti.jsp">Contatti</a>
             <% if(session.getAttribute("logged")!=null && session.getAttribute("logged") == Boolean.TRUE) {%>
-            <a class="navbar-brand" href="#">Profilo</a>
+            <a class="navbar-brand" href="./ProfiloServlet">Profilo</a>
             <a class="navbar-brand" href="#">Logout</a>
             <%} else { %>
             <a class="navbar-brand" href="sign_in.jsp">Sign-in</a>

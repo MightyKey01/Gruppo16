@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/base.css">
 </head>
 <body>
-<div class="text-white fixed-top">
+<div class="text-white">
     <h1 class="text-center">Turn4World</h1>
     <nav class="navbar" data-bs-theme="dark">
         <div class="container-fluid">
