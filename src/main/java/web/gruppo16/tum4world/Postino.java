@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class Postino {
     public static boolean invia(String destinatario){
-        final String mittente = "turn4world@gruppo16.it";
+        final String mittente = "tum4world@nessunonoluogonoesiste.com";
         final String password = "gruppo16";
         boolean successo = false;
 

@@ -27,15 +27,15 @@ public class LoginServlet extends HttpServlet {
             ResultSet rs = ps.executeQuery();
 
             if(rs.next()){
-                request.getSession().removeAttribute("errorMessage");
+                request.getSession().removeAttribute("errorLogin");
                 request.getSession().setAttribute("logged", true);
                 request.getSession().setAttribute("ruolo", rs.getString(1));
                 request.getSession().setAttribute("username", rs.getString(2));
-                response.sendRedirect("./ProfiloServlet");
+                response.sendRedirect(response.encodeURL("./ProfiloServlet"));
             }
             else{
-                request.getSession().setAttribute("errorMessage", "Username e/o Password errati!");
-                response.sendRedirect("login.jsp");
+                request.getSession().setAttribute("errorLogin", "16: Username e/o Password errati!");
+                response.sendRedirect(response.encodeURL("login.jsp"));
             }
             conn.close();
         } catch (ClassNotFoundException | SQLException ex) {

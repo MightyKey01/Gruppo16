@@ -1,11 +1,8 @@
 div.text-white{
-    background-color: black;
+    background-color: darkgreen;
 }
 
 nav.navbar{
-    background-color: black;
+    background-color: darkgreen;
 }
 
-div.card{
-    border-style: solid;
-}

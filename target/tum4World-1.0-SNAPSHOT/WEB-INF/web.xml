@@ -15,6 +15,7 @@
         <filter-name>loginFilter</filter-name>
         <url-pattern>/ProfiloServlet</url-pattern>
         <url-pattern>/CancellaAccountServlet</url-pattern>
+        <url-pattern>/LogoutServlet</url-pattern>
     </filter-mapping>
 
     <filter>
@@ -25,5 +26,29 @@
         <filter-name>redirectFilter</filter-name>
         <url-pattern>/login.jsp</url-pattern>
         <url-pattern>/sign_in.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>web.gruppo16.tum4world.AdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/ResetContatoriServlet</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>Visualizzazioni</filter-name>
+        <filter-class>web.gruppo16.tum4world.Visualizzazioni</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Visualizzazioni</filter-name>
+        <url-pattern>/index.jsp</url-pattern>
+        <url-pattern>/login.jsp</url-pattern>
+        <url-pattern>/sign_in.jsp</url-pattern>
+        <url-pattern>/contatti.jsp</url-pattern>
+        <url-pattern>/chi_siamo.jsp</url-pattern>
+        <url-pattern>/attività.jsp</url-pattern>
+        <url-pattern>/ProfiloServlet</url-pattern>
     </filter-mapping>
 </web-app>

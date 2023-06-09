@@ -34,6 +34,7 @@ public class IscrizioneServlet extends HttpServlet {
                 ps.executeUpdate();
             }
             conn.close();
+            response.sendRedirect(response.encodeURL("./ProfiloServlet"));
         }catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
         }

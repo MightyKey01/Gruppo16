@@ -28,6 +28,7 @@ public class CancellaAccountServlet extends HttpServlet {
             s.removeAttribute("username");
             s.removeAttribute("ruolo");
             s.removeAttribute("logged");
+            s.invalidate();
             conn.close();
             response.sendRedirect("index.jsp");
         } catch (ClassNotFoundException | SQLException ex) {

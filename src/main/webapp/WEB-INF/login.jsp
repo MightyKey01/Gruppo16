@@ -5,18 +5,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <title>Tum4World</title>
     <link rel="stylesheet" href="css/base.css">
+    <link rel="icon" href="images/logo.png" >
 </head>
 <body>
 <div class="text-white">
     <h1 class="text-center">Turn4World</h1>
     <nav class="navbar" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.jsp">Home</a>
-            <a class="navbar-brand" href="chi_siamo.jsp">Chi siamo</a>
-            <a class="navbar-brand" href="attività.jsp">Attività</a>
-            <a class="navbar-brand" href="contatti.jsp">Contatti</a>
-            <a class="navbar-brand" href="sign_in.jsp">Sign-in</a>
-            <a class="navbar-brand" href="login.jsp">Login</a>
+            <a class="navbar-brand" href="<% out.print(response.encodeURL("index.jsp"));%>">Home</a>
+            <a class="navbar-brand" href="<% out.print(response.encodeURL("chi_siamo.jsp"));%>">Chi siamo</a>
+            <a class="navbar-brand" href="<% out.print(response.encodeURL("attività.jsp"));%>">Attività</a>
+            <a class="navbar-brand" href="<% out.print(response.encodeURL("contatti.jsp"));%>">Contatti</a>
+            <a class="navbar-brand" href="<% out.print(response.encodeURL("sign_in.jsp"));%>">Sign-in</a>
+            <a class="navbar-brand" href="<% out.print(response.encodeURL("login.jsp"));%>">Login</a>
         </div>
     </nav>
 </div>
@@ -38,15 +39,47 @@
         </form>
     </div>
     <div class="row position-static bottom-0" id="errormessage" style="color: #FF0000;">
-        <h5>${errorMessage}</h5>
-    </div>
-    <div class="row" id="frase" style="position: absolute;top: 90%;left:38%">
-        <p>culo</p>
+        <h5>${errorLogin}</h5>
     </div>
 </div>
+<div <% if(session.getAttribute("firstvisit") == Boolean.TRUE) {%> hidden <%} else { request.getSession().setAttribute("firstvisit",true);}%>
+                                                                   id="modale" style="position: absolute; top: 80%;left:2%;border-style: dashed;background-color: beige;padding: 3px; box-shadow: 10px 10px lightblue;">
+    <p>Informativa riguardo la privacy e l'utilizzo dei cookie:</p>
+    <button type="button" class="btn btn-primary" style="top: 80%;left:2%;" onclick="nascondi()">Ho Capito</button>
+    <br>
+</div>
+
+<div id="frase" style="position: absolute;top: 90%;left:60%"></div>
 <div class="text-white fixed-bottom">
     <p class="fst-italic text-center">Turn4World, via Fittizia 0, CAP: 16000, Citta Fittizia, Nazione Fittizia</p>
 </div>
 </body>
 </html>
+
+<script>
+
+    const readTxt = async() =>{
+        let file = "frasi_filosofiche.txt";
+        let response = await fetch(file);
+        const txt = await response.text().then((str) => {
+            return str.split('\r\n');
+        });
+
+        const result = txt;
+        let scelta = Math.floor(Math.random() * 5);
+
+        document.getElementById("frase").innerHTML = "";
+        document.getElementById("frase").innerHTML = "<i>" + result[scelta] + "</i>";
+    }
+    readTxt();
+    setInterval(function (){
+        readTxt();
+    }, 20000);
+
+    function nascondi(){
+        let mod = document.getElementById("modale");
+        mod.setAttribute("hidden", "hidden");
+    }
+
+</script>
 

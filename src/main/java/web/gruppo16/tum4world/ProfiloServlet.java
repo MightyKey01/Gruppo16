@@ -24,13 +24,59 @@ public class ProfiloServlet extends HttpServlet {
             try (PrintWriter out = response.getWriter()) {
 
                 if (ruolo.equals("Admin")) {
-                    request.getRequestDispatcher("/admin.jsp").include(request, response);
-                } else {
+                    request.getRequestDispatcher("/fragments/admintop.jsp").include(request, response);
+
+                    out.println("<div hidden='hidden' class='text-center' id='utentireg'>");
+                    out.println("<table class=\"table\"><thead><tr><th scope=\"col\">Username</th><th scope=\"col\">Nome</th><th scope=\"col\">Cognome</th><th scope=\"col\">Ruolo</th></tr></thead><tbody>");
+                    PreparedStatement ps = conn.prepareStatement("SELECT USERNAME, NOME, COGNOME, RUOLO FROM UTENTI WHERE RUOLO <> 'Admin'");
+                    ResultSet rs = ps.executeQuery();
+                    while(rs.next()){
+                        out.println("<tr>");
+                        out.println("<td>" + rs.getString(1) + "</td>");
+                        out.println("<td>" + rs.getString(2) + "</td>");
+                        out.println("<td>" + rs.getString(3) + "</td>");
+                        out.println("<td>" + rs.getString(4) + "</td></tr>");
+                    }
+
+                    out.println("</tbody></table></div>");
+
+                    out.println("<div hidden='hidden' class='text-center' id='simpreg'>");
+                    out.println("<table class=\"table\"><thead><tr><th scope=\"col\">Username</th><th scope=\"col\">Nome</th><th scope=\"col\">Cognome</th><th scope=\"col\">Ruolo</th></tr></thead><tbody>");
+                    ps = conn.prepareStatement("SELECT USERNAME, NOME, COGNOME, RUOLO FROM UTENTI WHERE RUOLO = 'Simpatizzante'");
+                    rs = ps.executeQuery();
+                    while(rs.next()){
+                        out.println("<tr>");
+                        out.println("<td>" + rs.getString(1) + "</td>");
+                        out.println("<td>" + rs.getString(2) + "</td>");
+                        out.println("<td>" + rs.getString(3) + "</td>");
+                        out.println("<td>" + rs.getString(4) + "</td></tr>");
+                    }
+
+                    out.println("</tbody></table></div>");
+
+                    out.println("<div hidden='hidden' class='text-center' id='adereg'>");
+                    out.println("<table class=\"table\"><thead><tr><th scope=\"col\">Username</th><th scope=\"col\">Nome</th><th scope=\"col\">Cognome</th><th scope=\"col\">Ruolo</th></tr></thead><tbody>");
+                    ps = conn.prepareStatement("SELECT USERNAME, NOME, COGNOME, RUOLO FROM UTENTI WHERE RUOLO = 'Aderente'");
+                    rs = ps.executeQuery();
+                    while(rs.next()){
+                        out.println("<tr>");
+                        out.println("<td>" + rs.getString(1) + "</td>");
+                        out.println("<td>" + rs.getString(2) + "</td>");
+                        out.println("<td>" + rs.getString(3) + "</td>");
+                        out.println("<td>" + rs.getString(4) + "</td></tr>");
+                    }
+
+                    out.println("</tbody></table></div>");
+
+
+                    request.getRequestDispatcher("/fragments/admindown.html").include(request, response);
+                }
+                else {
                     if (ruolo.equals("Aderente")) {
-                        request.getRequestDispatcher("/fragments/adetop.html").include(request, response);
+                        request.getRequestDispatcher("/fragments/adetop.jsp").include(request, response);
                     }
                     if (ruolo.equals("Simpatizzante")) {
-                        request.getRequestDispatcher("/fragments/simptop.html").include(request, response);
+                        request.getRequestDispatcher("/fragments/simptop.jsp").include(request, response);
                     }
 
                     out.println("<div hidden='hidden' class='text-center' id='personalinfo'>");
@@ -53,12 +99,11 @@ public class ProfiloServlet extends HttpServlet {
                     out.println("</div>");
 
                     out.println("<br>");
-                    out.println("<div class='px-5' hidden='hidden' id='cardsactivity'>");
+                    out.println("<div class='px-5 text-center' hidden='hidden' id='cardsactivity'>");
                     ps = conn.prepareStatement("SELECT * FROM Attivita");
                     rs = ps.executeQuery();
-
                     while (rs.next()) {
-                        out.println("<form name='iscrizionecard' action='IscrizioneServlet' method='post'>");
+                        out.println("<form name='iscrizionecard' action='" + response.encodeURL("./IscrizioneServlet") + "' method='post'>");
                         out.println("<div class='card' style='width: 18rem;'>");
                         out.println("<div class='card-header' style='background-color: #80ced6;'>" + rs.getString(2) + "</div>");
                         out.println("<div class='card-body' style='background-color: #d5f4e6;'>");
@@ -68,6 +113,7 @@ public class ProfiloServlet extends HttpServlet {
                         out.println("</div></div></form>");
                     }
                     out.println("</div>");
+
 
                     if (ruolo.equals("Aderente")) {
                         request.getRequestDispatcher("/fragments/adedown.html").include(request, response);

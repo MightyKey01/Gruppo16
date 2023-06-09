@@ -1,0 +1,165 @@
+<div class="row" id="frase" style="position: absolute;top: 90%;left:38%">
+
+</div>
+
+<div class="text-white fixed-bottom">
+    <p class="fst-italic text-center">Turn4World, via Fittizia 0, CAP: 16000, Citta Fittizia, Nazione Fittizia</p>
+</div>
+
+</body>
+</html>
+
+<script>
+    const anno = new Date().getFullYear()
+
+    function showUtenti(){
+        let rst = document.getElementById("rst")
+        let reg = document.getElementById("utentireg");
+        let simp = document.getElementById("simpreg");
+        let ade = document.getElementById("adereg");
+        let grafvis = document.getElementById("grafvis")
+        let grafdon = document.getElementById("grafdon");
+        rst.setAttribute("hidden", "hidden");
+        grafdon.setAttribute("hidden", "hidden");
+        reg.removeAttribute("hidden");
+        simp.setAttribute("hidden", "hidden");
+        ade.setAttribute("hidden", "hidden");
+        grafvis.setAttribute("hidden", "hidden");
+    }
+
+    function showSimp(){
+        let rst = document.getElementById("rst")
+        let reg = document.getElementById("utentireg");
+        let simp = document.getElementById("simpreg");
+        let ade = document.getElementById("adereg");
+        let grafvis = document.getElementById("grafvis")
+        let grafdon = document.getElementById("grafdon");
+        rst.setAttribute("hidden", "hidden");
+        grafdon.setAttribute("hidden", "hidden")
+        simp.removeAttribute("hidden");
+        reg.setAttribute("hidden", "hidden");
+        ade.setAttribute("hidden", "hidden");
+        grafvis.setAttribute("hidden", "hidden");
+    }
+
+    function showAde(){
+        let rst = document.getElementById("rst")
+        let reg = document.getElementById("utentireg");
+        let simp = document.getElementById("simpreg");
+        let ade = document.getElementById("adereg");
+        let grafvis = document.getElementById("grafvis")
+        let grafdon = document.getElementById("grafdon");
+        rst.setAttribute("hidden", "hidden");
+        grafdon.setAttribute("hidden", "hidden");
+        ade.removeAttribute("hidden");
+        simp.setAttribute("hidden", "hidden");
+        reg.setAttribute("hidden", "hidden");
+        grafvis.setAttribute("hidden", "hidden");
+    }
+
+    function showGrafVis(){
+        let rst = document.getElementById("rst")
+        let reg = document.getElementById("utentireg");
+        let simp = document.getElementById("simpreg");
+        let ade = document.getElementById("adereg");
+        let grafvis = document.getElementById("grafvis")
+        let grafdon = document.getElementById("grafdon");
+        rst.removeAttribute("hidden");
+        grafdon.setAttribute("hidden", "hidden");
+        ade.setAttribute("hidden", "hidden");
+        simp.setAttribute("hidden", "hidden");
+        reg.setAttribute("hidden", "hidden");
+        grafvis.removeAttribute("hidden");
+    }
+
+    function showGravDon(){
+        let rst = document.getElementById("rst")
+        let reg = document.getElementById("utentireg");
+        let simp = document.getElementById("simpreg");
+        let ade = document.getElementById("adereg");
+        let grafvis = document.getElementById("grafvis")
+        let grafdon = document.getElementById("grafdon");
+        rst.setAttribute("hidden", "hidden");
+        ade.setAttribute("hidden", "hidden");
+        simp.setAttribute("hidden", "hidden");
+        reg.setAttribute("hidden", "hidden");
+        grafvis.setAttribute("hidden", "hidden");
+        grafdon.removeAttribute("hidden");
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+
+        var options = {
+            title:{
+                text: 'Visualizzazioni Pagine'
+            },
+            chart: {
+                type: 'column'
+            },
+            xAxis:{
+                categories: ['Home', 'Login', 'SignIn', 'Contatti', 'Chi Siamo', 'Attività', 'Profilo']
+            },
+            series: [{}]
+        };
+
+        Highcharts.ajax({
+            url: './visualizzazioni.json',
+            success: function(data){
+                obj = JSON.parse(data);
+                options.series[0].name = "Visualizzazioni";
+                let tot = obj.visualizzazioni[0].vis + obj.visualizzazioni[1].vis+obj.visualizzazioni[2].vis+obj.visualizzazioni[3].vis+obj.visualizzazioni[4].vis+obj.visualizzazioni[5].vis+obj.visualizzazioni[6].vis;
+                document.getElementById("vistot").innerHTML = "Totale visite: " + tot;
+                options.series[0].data = [obj.visualizzazioni[0].vis,obj.visualizzazioni[1].vis,obj.visualizzazioni[2].vis,obj.visualizzazioni[3].vis,obj.visualizzazioni[4].vis,obj.visualizzazioni[5].vis,obj.visualizzazioni[6].vis];
+                new Highcharts.Chart('grafvis', options);
+            }
+        })
+    })
+
+    document.addEventListener('DOMContentLoaded', function(){
+
+        var options = {
+            title:{
+                text: 'Donazioni'
+            },
+            chart: {
+                type: 'column'
+            },
+            xAxis:{
+                categories: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre']
+            },
+            series: [{}]
+        };
+
+        Highcharts.ajax({
+            url: './donazioni.json',
+            success: function(data){
+                obj = JSON.parse(data);
+                obj = obj.donazioni;
+                let jan = 0; let feb = 0; let mar = 0; let apr = 0; let may = 0; let jun = 0; let jul = 0; let aug = 0; let sep = 0; let oct = 0; let nov = 0; let dec = 0;
+                for(const don of obj){
+                    const separator = don.data.split(' ')
+                    if(separator[5] == anno){
+                        let mese = separator[1];
+                        if(mese == "Jan"){ jan += don.ammontare}
+                        if(mese == "Feb"){ feb += don.ammontare}
+                        if(mese == "Mar"){ mar += don.ammontare}
+                        if(mese == "Apr"){ apr += don.ammontare}
+                        if(mese == "May"){ may += don.ammontare}
+                        if(mese == "Jun"){ jun += don.ammontare}
+                        if(mese == "Jul"){ jul += don.ammontare}
+                        if(mese == "Aug"){ aug += don.ammontare}
+                        if(mese == "Sep"){ sep += don.ammontare}
+                        if(mese == "Oct"){ oct += don.ammontare}
+                        if(mese == "Nov"){ nov += don.ammontare}
+                        if(mese == "Dec"){ dec += don.ammontare}
+                    }
+                }
+
+                options.series[0].name = "Euro";
+                options.series[0].data = [jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec];
+                new Highcharts.Chart('grafdon', options);
+            }
+        })
+    })
+
+</script>

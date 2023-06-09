@@ -15,9 +15,9 @@ public class ContattiServlet extends HttpServlet {
         String destinatario = request.getParameter("emailcont");
         PrintWriter out = response.getWriter();
         if(Postino.invia(destinatario)){
-            out.println("Invio Confermato");
+            response.sendRedirect(response.encodeURL("invioConfermato.jsp"));
         }else{
-            out.println("Qualcosa è andato storto...");
+            out.println("Oh Oh...Qualcosa è andato storto...");
         }
     }
 }

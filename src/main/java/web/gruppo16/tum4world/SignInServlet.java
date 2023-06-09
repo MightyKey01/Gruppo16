@@ -29,23 +29,28 @@ public class SignInServlet extends HttpServlet {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
             conn = DriverManager.getConnection(dbURL);
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO UTENTI values (?,?,?,?,?,?,?,?)");
-            ps.setString(1,nome);
-            ps.setString(2,cognome);
-            ps.setString(3,data);
-            ps.setString(4,email);
-            ps.setString(5,tel);
-            ps.setString(6,ruolo);
-            ps.setString(7,username);
-            ps.setString(8,pass);
-            int count = ps.executeUpdate();
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM UTENTI WHERE USERNAME = ?");
+            ps.setString(1,username);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                request.getSession().setAttribute("errorSignIn", "16: Username gia utilizzato!");
+                response.sendRedirect(response.encodeURL("sign_in.jsp"));
+            }else{
+                request.getSession().removeAttribute("errorSignIn");
+                ps = conn.prepareStatement("INSERT INTO UTENTI values (?,?,?,?,?,?,?,?)");
+                ps.setString(1,nome);
+                ps.setString(2,cognome);
+                ps.setString(3,data);
+                ps.setString(4,email);
+                ps.setString(5,tel);
+                ps.setString(6,ruolo);
+                ps.setString(7,username);
+                ps.setString(8,pass);
+                ps.executeUpdate();
+                response.sendRedirect(response.encodeURL("registrazioneConfermata.jsp"));
+            }
             conn.close();
-            if(count > 0){
-                out.println("Registrazione effettuata");
-            }
-            else{
-                out.println("Qualcosa è andato storto");
-            }
+
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
 

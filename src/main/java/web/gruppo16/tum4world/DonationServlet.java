@@ -1,5 +1,9 @@
 package web.gruppo16.tum4world;
 
+import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -12,48 +16,41 @@ public class DonationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ammontare = request.getParameter("ammontareform");
-        Donazione d = new Donazione((String)request.getSession(false).getAttribute("username"),Integer.parseInt(ammontare));
-        String filecontent = "";
+        JSONObject donazione = new JSONObject();
+        donazione.put("donatore", (String)request.getSession(false).getAttribute("username"));
+        donazione.put("ammontare",Integer.parseInt(ammontare));
+        Date d = new Date();
+        donazione.put("data", d.toString());
+
+        JSONParser parser = new JSONParser();
+        JSONArray arr;
+        JSONObject result = new JSONObject();
+
+
 
         File file = new File(getServletContext().getRealPath("/")+"\\donazioni.json");
         try(FileReader r = new FileReader(file)){
-            char[] chars = new char[(int) file.length()];
-            r.read(chars);
-            chars[((int) file.length())-1] = ',';
-            filecontent = new String(chars);
+            JSONObject jo = (JSONObject) parser.parse(r);
+            arr = (JSONArray) jo.get("donazioni");
+            arr.add(donazione);
+            result.put("donazioni",arr);
+
         }catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        filecontent += d.toJSON() + "]";
-
         try(FileWriter p = new FileWriter(file)){
-            p.write(filecontent);
+            p.write(result.toJSONString());
+
         }catch (FileNotFoundException e){
            e.printStackTrace();
         }
 
-        response.sendRedirect("./ProfiloServlet");
-    }
-
-}
-
-class Donazione{
-    String donatore;
-    int ammontare;
-    Date data;
-
-    Donazione(String _donatore, int _ammontare){
-        donatore = _donatore;
-        ammontare = _ammontare;
-        data = new Date();
-    }
-
-    public String toJSON(){
-        String json = "{ \"donatore\": \""+donatore+"\",";
-        json += "\"ammontare\": \""+ammontare+"\",";
-        json += "\"data\": \""+data+"\"}";
-        return json;
+        response.sendRedirect(response.encodeURL("./ProfiloServlet"));
     }
 }
+
+
 

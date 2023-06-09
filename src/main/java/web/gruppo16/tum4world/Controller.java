@@ -21,7 +21,7 @@ public class Controller implements Filter {
         if(!logged){
             filterChain.doFilter(servletRequest,servletResponse);
         }else{
-            response.sendRedirect("./ProfiloServlet");
+            response.sendRedirect(response.encodeURL("./ProfiloServlet"));
         }
     }
 

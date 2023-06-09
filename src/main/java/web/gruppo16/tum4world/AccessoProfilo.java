@@ -21,8 +21,8 @@ public class AccessoProfilo implements Filter {
         if(logged){
             filterChain.doFilter(servletRequest,servletResponse);
         }else{
-            request.getSession().setAttribute("errorMessage", "Devi prima eseguire il login!");
-            response.sendRedirect("login.jsp");
+            request.getSession().setAttribute("errorLogin", "16: Devi prima eseguire il login!");
+            response.sendRedirect(response.encodeURL("login.jsp"));
         }
      }
 
